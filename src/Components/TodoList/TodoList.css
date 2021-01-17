@@ -1,0 +1,26 @@
+.todolist {
+  flex: 0 0 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: rgba(255, 166, 0, 0.671);
+}
+
+.todolist__inner {
+  padding: 20px;
+}
+
+.todolist__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  color: blue;
+}
+
+.todolist__form {
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
