@@ -1,6 +1,4 @@
 .app {
   display: flex;
-  background-color: rgba(255, 166, 0, 0.671);
   min-height: 100vh;
-  color: blue;
 }

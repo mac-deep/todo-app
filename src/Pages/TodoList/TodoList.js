@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Todo from "./Todo/Todo";
-import "./TodoList.css";
-import { TextField, Button, Typography, Grid, List } from "@material-ui/core";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import db from "../../firebase";
-import AddIcon from "@material-ui/icons/Add";
-import firebase from "firebase";
+import React, { useState, useEffect } from 'react';
+import Todo from '../../Components/Todo/Todo';
+import './TodoList.css';
+import { TextField, Button, Typography, Grid, List } from '@material-ui/core';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import { db } from '../../firebase';
+import AddIcon from '@material-ui/icons/Add';
+import firebase from 'firebase';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   const addTodo = (event) => {
     event.preventDefault();
-    db.collection("todos").add({
+    db.collection('todos').add({
       todo: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setTodos([...todos, input]);
-    setInput("");
+    setInput('');
   };
 
   useEffect(() => {
-    db.collection("todos")
-      .orderBy("timestamp", "desc")
+    db.collection('todos')
+      .orderBy('timestamp', 'desc')
       .onSnapshot((snapshot) => {
-        setTodos(
-          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
-        );
+        setTodos(snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo })));
       });
   }, []);
 
@@ -71,9 +69,9 @@ function TodoList() {
 
         {/*-----todo item component rendering----- */}
         <div className="todolist__items">
-          {todos.map((todo) => (
+          {todos.map((todo, index) => (
             <List>
-              <Todo task={todo} />
+              <Todo key={index} task={todo} />
             </List>
           ))}
         </div>

@@ -1,20 +1,21 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Timelapse, Assignment } from "@material-ui/icons";
-import TodoList from "./TodoList/TodoList";
-import TimeTracker from "./TimeTracker";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Avatar from "@material-ui/core/Avatar";
+import React, { useState } from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { Timelapse, Assignment } from '@material-ui/icons';
+import TodoList from '../TodoList/TodoList';
+import TimeTracker from '../../Components/TimeTracker';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   fullList: {
-    width: "auto",
+    width: 'auto',
   },
   large: {
     width: theme.spacing(7),
@@ -43,14 +44,10 @@ export default function SwipeableTemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
-  const [component, setComponent] = useState("");
+  const [component, setComponent] = useState('');
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
@@ -60,23 +57,23 @@ export default function SwipeableTemporaryDrawer() {
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-      style={{ backgroundColor: "rgba(255, 166, 0, 0.671)", height: "100%" }}
+      style={{ height: '100%' }}
     >
       <Avatar className={classes.large} />
       <p>Deep Makadiya</p>
       <List>
-        <ListItem button onClick={(e) => setComponent("TodoList")}>
+        <ListItem button onClick={(e) => setComponent('TodoList')}>
           <ListItemIcon>
             <Assignment />
           </ListItemIcon>
           <ListItemText primary="Todos" />
         </ListItem>
-        <ListItem button onClick={(e) => setComponent("TimeTracker")}>
+        <ListItem button onClick={(e) => setComponent('TimeTracker')}>
           <ListItemIcon>
             <Timelapse />
           </ListItemIcon>
@@ -90,15 +87,12 @@ export default function SwipeableTemporaryDrawer() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {["left"].map((anchor) => (
+          {['left'].map((anchor) => (
             <React.Fragment key={anchor}>
-              <IconButton
-                onClick={toggleDrawer(anchor, true)}
-                style={{ color: "white" }}
-              >
+              <IconButton onClick={toggleDrawer(anchor, true)} style={{ color: 'white' }}>
                 <MenuIcon />
               </IconButton>
-
+          
               <SwipeableDrawer
                 anchor={anchor}
                 open={state[anchor]}
@@ -112,17 +106,14 @@ export default function SwipeableTemporaryDrawer() {
           <Typography variant="h6" className={classes.title}>
             Productivity
           </Typography>
+          <Button edge="end" variant="text">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
       {/* -----Component to render----- */}
-      {component === "TodoList" ? (
-        <TodoList />
-      ) : component === "TimeTracker" ? (
-        <TimeTracker />
-      ) : (
-        <h1>Welcome...</h1>
-      )}
+      {component === 'TodoList' ? <TodoList /> : component === 'TimeTracker' ? <TimeTracker /> : <h1>Welcome...</h1>}
     </div>
   );
 }
