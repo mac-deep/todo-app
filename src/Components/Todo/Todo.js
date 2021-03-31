@@ -60,33 +60,26 @@ function Todo(props) {
       </Modal>
       <Paper elevation={2}>
         <ListItem role={undefined} dense button>
-          <Grid container>
-            <Grid item xs={1}>
-              <ListItemIcon justify="center">
-                <Checkbox edge="start" tabIndex={-1} disableRipple color="primary" />
-              </ListItemIcon>
-            </Grid>
-            <Grid item xs={9}>
-              <ListItemText primary={props.task.todo} />
-            </Grid>
-            <Grid item xs={2}>
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="comments" onClick={(e) => setOpen(true)}>
-                  <EditIcon color="primary" />
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  aria-label="comments"
-                  onClick={(event) => {
-                    db.collection('todos').doc(props.task.id).delete();
-                    console.log('clicked');
-                  }}
-                >
-                  <DeleteIcon color="action" />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </Grid>
-          </Grid>
+          <ListItemIcon justify="center">
+            <Checkbox edge="start" tabIndex={-1} disableRipple color="primary" />
+          </ListItemIcon>
+          <ListItemText>{props.task.todo}</ListItemText>
+          <ListItemSecondaryAction>
+            <IconButton edge="end" aria-label="comments" onClick={(e) => setOpen(true)}>
+              <EditIcon color="primary" />
+            </IconButton>
+            <IconButton
+              color="secondary"
+              edge="end"
+              aria-label="comments"
+              onClick={(event) => {
+                db.collection('todos').doc(props.task.id).delete();
+                console.log('clicked');
+              }}
+            >
+              <DeleteIcon color="action" />
+            </IconButton>
+          </ListItemSecondaryAction>
         </ListItem>
       </Paper>
     </>

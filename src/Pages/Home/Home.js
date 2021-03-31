@@ -1,119 +1,65 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { Timelapse, Assignment } from '@material-ui/icons';
-import TodoList from '../TodoList/TodoList';
-import TimeTracker from '../../Components/TimeTracker';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Avatar from '@material-ui/core/Avatar';
-import { Button } from '@material-ui/core';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerContainer: {
+    overflow: 'auto',
+  },
+  content: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    padding: theme.spacing(3),
   },
 }));
 
-export default function SwipeableTemporaryDrawer() {
+export default function ClippedDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false,
-  });
-  const [component, setComponent] = useState('');
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-      style={{ height: '100%' }}
-    >
-      <Avatar className={classes.large} />
-      <p>Deep Makadiya</p>
-      <List>
-        <ListItem button onClick={(e) => setComponent('TodoList')}>
-          <ListItemIcon>
-            <Assignment />
-          </ListItemIcon>
-          <ListItemText primary="Todos" />
-        </ListItem>
-        <ListItem button onClick={(e) => setComponent('TimeTracker')}>
-          <ListItemIcon>
-            <Timelapse />
-          </ListItemIcon>
-          <ListItemText primary="Time Tracker" />
-        </ListItem>
-      </List>
-    </div>
-  );
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          {['left'].map((anchor) => (
-            <React.Fragment key={anchor}>
-              <IconButton onClick={toggleDrawer(anchor, true)} style={{ color: 'white' }}>
-                <MenuIcon />
-              </IconButton>
-          
-              <SwipeableDrawer
-                anchor={anchor}
-                open={state[anchor]}
-                onClose={toggleDrawer(anchor, false)}
-                onOpen={toggleDrawer(anchor, true)}
-              >
-                {list(anchor)}
-              </SwipeableDrawer>
-            </React.Fragment>
-          ))}
-          <Typography variant="h6" className={classes.title}>
-            Productivity
-          </Typography>
-          <Button edge="end" variant="text">
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <CssBaseline />
 
-      {/* -----Component to render----- */}
-      {component === 'TodoList' ? <TodoList /> : component === 'TimeTracker' ? <TimeTracker /> : <h1>Welcome...</h1>}
+      <main className={classes.content}>
+        <Toolbar />
+        <Typography paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum
+          velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu
+          scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
+          lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed
+          ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+        </Typography>
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam
+          dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus
+          sed viverra tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed odio morbi. Euismod
+          lacinia at quis risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in.
+          In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
+          morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean euismod
+          elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere
+          sollicitudin aliquam ultrices sagittis orci a.
+        </Typography>
+      </main>
     </div>
   );
 }

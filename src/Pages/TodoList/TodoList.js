@@ -32,10 +32,10 @@ function TodoList() {
   return (
     <div className="todolist">
       <div className="todolist__inner">
-        <Typography variant="h3" className="todolist__title">
+        {/* <Typography variant="h3" className="todolist__title">
           <AssignmentIcon fontSize="large" />
           Todo list
-        </Typography>
+        </Typography> */}
 
         {/*-----add todo form-----*/}
         <div className="todolist__form">
@@ -68,13 +68,26 @@ function TodoList() {
         </div>
 
         {/*-----todo item component rendering----- */}
-        <div className="todolist__items">
-          {todos.map((todo, index) => (
-            <List>
-              <Todo key={index} task={todo} />
-            </List>
-          ))}
-        </div>
+        <Grid container spacing={2}>
+          <Grid item md={6} xs={12}>
+            <div className="todolist__items">
+              {todos.map((todo, index) => (
+                <List>
+                  <Todo key={index} task={todo} />
+                </List>
+              ))}
+            </div>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <div className="todolist__items">
+              {todos.map((todo, index) => (
+                <List>
+                  <Todo key={index} task={todo} />
+                </List>
+              ))}
+            </div>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
